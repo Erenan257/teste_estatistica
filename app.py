@@ -13,7 +13,7 @@ class Usuario(db.Model):
 @app.route('/')
 def index():
     usuarios = Usuario.query.all()
-    return render_template('index.html', usuarios=usuarios)
+    return render_template('registro.html', usuarios=usuarios)
 
 if __name__ == '__main__':
     with app.app_context():
