@@ -1,10 +1,9 @@
-# filepath: /home/renan/Documentos/teste_estatistica/teste_estatistica/app.py
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
+app.secret_key = 'secreta'  # Necessário para usar mensagens flash
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/renan/Documentos/teste_estatistica/teste_estatistica/instance/meu_banco.db'
 db = SQLAlchemy(app)
 
 class Usuario(db.Model):
@@ -28,4 +27,16 @@ def adicionar():
 
     # Verifica se o email já está registrado
     if Usuario.query.filter_by(email=email).first():
-        return "Email já registrado!"
+        flash('Email já registrado!', 'danger')
+        return redirect(url_for('index'))
+
+    # Adiciona novo usuário
+    novo_usuario = Usuario(email=email, senha=senha)
+    db.session.add(novo_usuario)
+    db.session.commit()
+
+    flash('Usuário registrado com sucesso!', 'success')
+    return redirect(url_for('index'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
