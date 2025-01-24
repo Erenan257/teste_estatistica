@@ -15,7 +15,7 @@ class Usuario(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/')
+@app.route('/') 
 def index():
     usuarios = Usuario.query.all()
     return render_template('registro.html', usuarios=usuarios)
