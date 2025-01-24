@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash # importa funções do flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.secret_key = 'secreta'  # Necessário para usar mensagens flash
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/renan/Documentos/teste_estatistica/teste_estatistica/instance/meu_banco.db'
+app.secret_key = 'socjksjdsjkjkkdsfds2356fds6g456sg45f6dg4f5d6'  # Necessário para usar mensagens flash
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meu_banco.db'
 db = SQLAlchemy(app)
 
 class Usuario(db.Model):
